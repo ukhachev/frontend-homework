@@ -1,12 +1,10 @@
 'use strict'
 
 function format(input, colls) {
-    var strings = input.map(function(number) {
-        return number.toString()
-    });
+    const strings = input.map(number => number.toString());
 
-    var maxLength = strings.reduce(function(max, str, index) {
-        var curCol = index % colls;
+    const maxLength = strings.reduce(function(max, str, index) {
+        const curCol = index % colls;
         if (!max[curCol]) {
             max[curCol] = 0;
         }
@@ -15,17 +13,14 @@ function format(input, colls) {
         return max;
     }, new Array(colls));
 
-    var result = strings.reduce(function(result, number, index) {
-        if (result && index % colls == 0) {
-            result += '\n';
-        } else if (result) {
-            result += ' '
+    let result = strings.reduce(function(outText, number, index) {
+        if (outText && index % colls == 0) {
+            outText += '\n';
+        } else if (outText) {
+            outText += ' '
         }
-        var spaces = (
-            new Array(maxLength[index % colls] - number.length + 1)
-        ).join(' ');
-
-        return result + spaces + number;
+        const spaces = ' '.repeat(maxLength[index % colls] - number.length);
+        return outText + spaces + number;
     }, '');
     return result;
     
