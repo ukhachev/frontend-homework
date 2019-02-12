@@ -3,7 +3,7 @@
 function format(input, colls) {
     const strings = input.map(number => number.toString());
 
-    const maxLength = strings.reduce(function(max, str, index) {
+    const maxLength = strings.reduce((max, str, index) => {
         const curCol = index % colls;
         if (!max[curCol]) {
             max[curCol] = 0;
@@ -13,7 +13,7 @@ function format(input, colls) {
         return max;
     }, new Array(colls));
 
-    let result = strings.reduce(function(outText, number, index) {
+    let result = strings.reduce((outText, number, index) => {
         if (outText && index % colls == 0) {
             outText += '\n';
         } else if (outText) {
