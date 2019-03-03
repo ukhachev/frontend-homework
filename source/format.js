@@ -1,6 +1,10 @@
 'use strict'
 
 function format(input, colls) {
+    if (!Array.isArray(input) || 
+            !(Number.isInteger(colls) && colls > 0)){
+        return null;
+    }
     const strings = input.map(number => number.toString());
 
     const maxLength = strings.reduce((max, str, index) => {
@@ -13,7 +17,7 @@ function format(input, colls) {
         return max;
     }, new Array(colls));
 
-    let result = strings.reduce((outText, number, index) => {
+    const result = strings.reduce((outText, number, index) => {
         if (outText && index % colls == 0) {
             outText += '\n';
         } else if (outText) {
